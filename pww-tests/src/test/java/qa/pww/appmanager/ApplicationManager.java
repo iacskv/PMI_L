@@ -52,7 +52,8 @@ public class ApplicationManager {
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
     if (browser.equals(BrowserType.FIREFOX)) {
-      FirefoxBinary binary = new FirefoxBinary(new File("D:/Program Files/Mozilla Firefox/firefox.exe"));
+      //FirefoxBinary binary = new FirefoxBinary(new File("D:/Program Files/Mozilla Firefox/firefox.exe"));
+      FirefoxBinary binary = new FirefoxBinary(new File("C:/Mozilla Firefox/firefox.exe"));
       wd = new FirefoxDriver(binary, new FirefoxProfile());
       wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     } else if (browser.equals(BrowserType.CHROME)) {
