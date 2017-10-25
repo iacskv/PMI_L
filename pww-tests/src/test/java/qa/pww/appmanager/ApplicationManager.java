@@ -1,5 +1,6 @@
 package qa.pww.appmanager;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
@@ -16,6 +17,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
+import static qa.pww.PmiLocators.ConfirmFormDistonary.YESCONFIRMDIST;
+import static qa.pww.PmiLocators.ConfirmFormUser.OKCONFIRMUSER;
+import static qa.pww.PmiLocators.ConfirmFormUser.YESCONFIRMUSER;
+import static qa.pww.PmiLocators.DistonaryPage.DELETEDISTBTN;
+import static qa.pww.PmiLocators.RolePage.DELETEROLEBTN;
+import static qa.pww.PmiLocators.UserPage.DELETEUSERBTN;
 
 /**
  * Created by Константин on 19.03.2017.
@@ -132,6 +140,7 @@ public class ApplicationManager {
         rs = st9.executeUpdate();
         st7.close();
     }
+
 
     //остановка вэб-драйвера и отключения от БД
     public void stop() throws SQLException {

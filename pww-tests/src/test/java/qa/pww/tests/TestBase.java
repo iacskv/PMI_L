@@ -23,6 +23,7 @@ public class TestBase {
         app.init();
         app.clearPvvDb();
         app.clearZagsDb();
+
     }
 
     @AfterSuite(alwaysRun = true)
