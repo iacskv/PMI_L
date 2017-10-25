@@ -14,21 +14,21 @@ import java.sql.SQLException;
  */
 public class TestBase {
 
-  public static final ApplicationManager app
-          = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
+    public static final ApplicationManager app
+            = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
-  @BeforeSuite
-  public void setUp() throws Exception {
-    app.initDb();
-    app.init();
-    app.clearPvvDb();
-    app.clearZagsDb();
-  }
+    @BeforeSuite
+    public void setUp() throws Exception {
+        app.initDb();
+        app.init();
+        app.clearPvvDb();
+        app.clearZagsDb();
+    }
 
-  @AfterSuite (alwaysRun = true)
-  public void tearDown() throws SQLException {
-    app.stop();
-  }
+    @AfterSuite(alwaysRun = true)
+    public void tearDown() throws SQLException {
+        app.stop();
+    }
 
 
 }

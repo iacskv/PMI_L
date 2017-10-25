@@ -12,7 +12,7 @@ public class DbHelper {
         loadDbDriver();
     }
 
-    private void loadDbDriver(){
+    private void loadDbDriver() {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException e) {
@@ -20,7 +20,7 @@ public class DbHelper {
         }
     }
 
-    public Connection getConnection(String url, String user, String password){
+    public Connection getConnection(String url, String user, String password) {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);
@@ -29,7 +29,6 @@ public class DbHelper {
         }
         return connection;
     }
-
 
 
 }

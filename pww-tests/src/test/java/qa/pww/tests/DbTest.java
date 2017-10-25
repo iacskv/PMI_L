@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class DbTest extends TestBase {
 
-    public  String sqlFieldsBornRequest = "WITH DOCUMENT_VALUES AS (SELECT DOC_STAGE_PROP_ID PROPERTY_ID, REQ_ID, VALUE, LEVEL PROPERTY_LEVEL, ROWNUM PROPERTY_ORDER, PROP_ORDER MULTIPLICITY FROM DOCUMENT_STAGE_PROPERTY START WITH PARENT_ID IS NULL AND DOC_STAGE_ID = (SELECT MIN (doc_stage_id) FROM document_stage WHERE doc_id IN (SELECT MIN (doc_id) FROM document WHERE doc_grp_id IN (SELECT MAX (doc_grp_id) FROM document_group))) CONNECT BY PRIOR DOC_STAGE_PROP_ID = PARENT_ID) SELECT PROPERTY_ORDER, LPAD(' ', (PROPERTY_LEVEL - 1) * 6, ' ') || REQ_NAME PROPERTY_NAME, VALUE, MULTIPLICITY, DOCUMENT_VALUES.REQ_ID, REQ_CODE PROPERTY_CODE, PROPERTY_ID FROM DOCUMENT_VALUES, DOCUMENT_TYPE_REQUISITE WHERE DOCUMENT_VALUES.REQ_ID = DOCUMENT_TYPE_REQUISITE.REQ_ID ORDER BY PROPERTY_ORDER";
-    public  String sqlFieldsMarriedRequest = "WITH document_values AS (\n" +
+    public String sqlFieldsBornRequest = "WITH DOCUMENT_VALUES AS (SELECT DOC_STAGE_PROP_ID PROPERTY_ID, REQ_ID, VALUE, LEVEL PROPERTY_LEVEL, ROWNUM PROPERTY_ORDER, PROP_ORDER MULTIPLICITY FROM DOCUMENT_STAGE_PROPERTY START WITH PARENT_ID IS NULL AND DOC_STAGE_ID = (SELECT MIN (doc_stage_id) FROM document_stage WHERE doc_id IN (SELECT MIN (doc_id) FROM document WHERE doc_grp_id IN (SELECT MAX (doc_grp_id) FROM document_group))) CONNECT BY PRIOR DOC_STAGE_PROP_ID = PARENT_ID) SELECT PROPERTY_ORDER, LPAD(' ', (PROPERTY_LEVEL - 1) * 6, ' ') || REQ_NAME PROPERTY_NAME, VALUE, MULTIPLICITY, DOCUMENT_VALUES.REQ_ID, REQ_CODE PROPERTY_CODE, PROPERTY_ID FROM DOCUMENT_VALUES, DOCUMENT_TYPE_REQUISITE WHERE DOCUMENT_VALUES.REQ_ID = DOCUMENT_TYPE_REQUISITE.REQ_ID ORDER BY PROPERTY_ORDER";
+    public String sqlFieldsMarriedRequest = "WITH document_values AS (\n" +
             "    SELECT\n" +
             "        doc_stage_prop_id property_id,\n" +
             "        req_id,\n" +
@@ -63,7 +63,7 @@ public class DbTest extends TestBase {
         List<String> bookId = new ArrayList<>();
         PreparedStatement statement = app.getPvvDb().prepareStatement("select DOC_GRP_ID from DOCUMENT_GROUP");
         ResultSet resultSet = statement.executeQuery();
-        while( resultSet.next() ){
+        while (resultSet.next()) {
             bookId.add(resultSet.getString("DOC_GRP_ID"));
 
         }
@@ -73,8 +73,6 @@ public class DbTest extends TestBase {
     }
 
 
-
-
     @Test //загрузка реквизитов (код, название, значение) первого документа последней загруженной книги
     public void getFromDbDocMainFieldsWithName() throws Exception {
         String reqNameId;
@@ -82,12 +80,12 @@ public class DbTest extends TestBase {
         List<String> reqValue = new ArrayList<String>();
         PreparedStatement statement = app.getPvvDb().prepareStatement(sqlFieldsMarriedRequest);
         ResultSet resultSet = statement.executeQuery();
-        while( resultSet.next() ){
-            reqNameId = resultSet.getString("REQ_ID" );
-            PreparedStatement nameReqId = app.getPvvDb().prepareStatement("select REQ_NAME from DOCUMENT_TYPE_REQUISITE where REQ_ID = " +reqNameId);
+        while (resultSet.next()) {
+            reqNameId = resultSet.getString("REQ_ID");
+            PreparedStatement nameReqId = app.getPvvDb().prepareStatement("select REQ_NAME from DOCUMENT_TYPE_REQUISITE where REQ_ID = " + reqNameId);
             ResultSet rs = nameReqId.executeQuery();
             while (rs.next()) {
-                reqValue.add((reqNameId + " " + rs.getString("REQ_NAME") + " = " + resultSet.getString("VALUE" )));
+                reqValue.add((reqNameId + " " + rs.getString("REQ_NAME") + " = " + resultSet.getString("VALUE")));
             }
             rs.close();
             System.out.println(reqValue.get(i));
@@ -101,8 +99,8 @@ public class DbTest extends TestBase {
         List<String> reqValue = new ArrayList<>();
         PreparedStatement statement = app.getPvvDb().prepareStatement(sqlFieldsBornRequest);
         ResultSet resultSet = statement.executeQuery();
-        while( resultSet.next() ){
-            reqValue.add(resultSet.getString("VALUE" ));
+        while (resultSet.next()) {
+            reqValue.add(resultSet.getString("VALUE"));
         }
         resultSet.close();
     }

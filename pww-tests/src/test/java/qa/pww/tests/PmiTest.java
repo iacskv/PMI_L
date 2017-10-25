@@ -5,17 +5,13 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static org.apache.xalan.lib.ExsltDatetime.date;
 
 /**
  * Created by k.smotrov on 07.08.2017.
  */
-public class PmiTest extends TestBase{
+public class PmiTest extends TestBase {
 
     File path = new File("D:\\iacskv\\PWW_V1\\pww-tests\\src\\test\\resources\\maleContent.xlsx");
-    Date date = new Date();
     long time = System.currentTimeMillis();
     long currenttime;
     SimpleDateFormat startdate = new SimpleDateFormat("E yyyy.MM.dd hh:mm:ss");
@@ -24,24 +20,27 @@ public class PmiTest extends TestBase{
 
     // удаление роли, пользователя и справочника
     public void prepareFotTests() throws InterruptedException {
+
+        currenttime = System.currentTimeMillis();
+
         app.pmiHelper().deleteRole("Оператор ввода");
         app.pmiHelper().deleteUser("kron_op");
         app.pmiHelper().deleteDist("Пол");
 
-        currenttime = System.currentTimeMillis();
-        System.out.println("Начало прогона ПМИ " + startdate.format(time));
         System.out.println("подготовка завершена " + (currenttime - time));
+        System.out.println("Начало прогона ПМИ " + startdate.format(time));
+
 
     }
 
     //создание роли пользователя
-    @Test (enabled = true, priority = 1)
+    @Test(enabled = true, priority = 1)
     public void createRole() throws InterruptedException {
         app.pmiHelper().gotoRolePage();
         app.pmiHelper().createNewRole();
         app.pmiHelper().saveRole();
         app.pmiHelper().selectRole("Администратор");
-        app.pmiHelper().fillRole("Оператор ввода","1 и 2 этапы ввода документов");
+        app.pmiHelper().fillRole("Оператор ввода", "1 и 2 этапы ввода документов");
         app.pmiHelper().selectRole("Оператор ввода");
         app.pmiHelper().saveRole();
 
@@ -50,7 +49,7 @@ public class PmiTest extends TestBase{
     }
 
     //изменение прав роли пользователя
-    @Test (enabled = true, priority = 2)
+    @Test(enabled = true, priority = 2)
     public void changeRulesForRole() throws InterruptedException {
         app.pmiHelper().gotoRolePage();
         app.pmiHelper().selectRole("Оператор ввода");
@@ -63,11 +62,11 @@ public class PmiTest extends TestBase{
     }
 
     //создание пользователя и назначение роли
-    @Test (enabled = true, priority = 3)
+    @Test(enabled = true, priority = 3)
     public void createUser() throws InterruptedException {
         app.pmiHelper().gotoUserPage();
         app.pmiHelper().createUserBtn();
-        app.pmiHelper().fillNewUser("kron_op","Васин", "Игорь", "Семенович", "Оператор ввода", "Сотрудник ЗАГС");
+        app.pmiHelper().fillNewUser("kron_op", "Васин", "Игорь", "Семенович", "Оператор ввода", "Сотрудник ЗАГС");
         app.pmiHelper().saveNewUser();
         app.pmiHelper().exitNewUserBtn();
 
@@ -76,7 +75,7 @@ public class PmiTest extends TestBase{
     }
 
     //редактирование пользователя
-    @Test (enabled = true, priority = 4)
+    @Test(enabled = true, priority = 4)
     public void editUser() throws InterruptedException {
         app.pmiHelper().gotoUserPage();
         app.pmiHelper().selectUser("kron_op");
@@ -90,7 +89,7 @@ public class PmiTest extends TestBase{
     }
 
     //переназначение ролей для пользователя
-    @Test (enabled = true, priority = 5)
+    @Test(enabled = true, priority = 5)
     public void changeUserRole() throws InterruptedException {
         app.pmiHelper().gotoUserPage();
         app.pmiHelper().selectUser("kron_op");
@@ -104,7 +103,7 @@ public class PmiTest extends TestBase{
     }
 
     //смена пароля пользователя
-    @Test (enabled = true, priority = 6)
+    @Test(enabled = true, priority = 6)
     public void changePassUser() throws InterruptedException {
         app.pmiHelper().gotoUserPage();
         app.pmiHelper().selectUser("kron_op");
@@ -117,13 +116,13 @@ public class PmiTest extends TestBase{
     }
 
     //создание справочника
-    @Test (enabled = true, priority = 7)
-    public void createDistonary(){
+    @Test(enabled = true, priority = 7)
+    public void createDistonary() {
         app.pmiHelper().gotoDistonaryPage();
         app.pmiHelper().addDistonaryBtn();
         app.pmiHelper().fillNewColumnDist("Пол", "Строка", "male");
         app.pmiHelper().createNewColumnBtn();
-        app.pmiHelper().fillNewDist("Пол","male","Пол");
+        app.pmiHelper().fillNewDist("Пол", "male", "Пол");
         app.pmiHelper().SaveAndExitDistBtn();
 
         currenttime = System.currentTimeMillis();
@@ -131,7 +130,7 @@ public class PmiTest extends TestBase{
     }
 
     //редактирование аттрибутов справочника
-    @Test (enabled = true, priority = 8)
+    @Test(enabled = true, priority = 8)
     public void editAttrDistonary() throws InterruptedException {
         app.pmiHelper().gotoDistonaryPage();
         app.pmiHelper().selectDistonary("Пол");
@@ -145,7 +144,7 @@ public class PmiTest extends TestBase{
     }
 
     //заполнение справочника данными
-    @Test (enabled = true, priority = 9)
+    @Test(enabled = true, priority = 9)
     public void fillContentDistonary() throws InterruptedException {
         app.pmiHelper().gotoDistonaryPage();
         app.pmiHelper().selectDistonary("Пол");
@@ -160,7 +159,7 @@ public class PmiTest extends TestBase{
     }
 
     //редактирование данных справочника
-    @Test (enabled = true, priority = 10)
+    @Test(enabled = true, priority = 10)
     public void editContentDistinary() throws InterruptedException {
         app.pmiHelper().gotoDistonaryPage();
         app.pmiHelper().selectDistonary("Пол");
@@ -176,7 +175,7 @@ public class PmiTest extends TestBase{
     }
 
     //удаление данных в справочнике
-    @Test (enabled = true, priority = 11)
+    @Test(enabled = true, priority = 11)
     public void deleteContentDistinary() throws InterruptedException {
         app.pmiHelper().gotoDistonaryPage();
         app.pmiHelper().selectDistonary("Пол");
@@ -190,7 +189,7 @@ public class PmiTest extends TestBase{
     }
 
     //загрузка данных в справочник из файла
-    @Test (enabled = true, priority = 12)
+    @Test(enabled = true, priority = 12)
     public void loadContentDistinaryFromFile() throws InterruptedException {
         app.pmiHelper().gotoDistonaryPage();
         app.pmiHelper().selectDistonary("Пол");
@@ -205,18 +204,18 @@ public class PmiTest extends TestBase{
     }
 
     //загрузка книги а/з
-    @Test (enabled = true, priority = 13)
-    public void loadNewBook () throws InterruptedException {
-       app.pmiHelper().loadPage();
-       app.pmiHelper().fillLoadParamBook("2003", "Книга записей актов (2000-2003)", "Смерть", "Кронштадтский (1997-2003)", "1СМ", "1", "1");
-       app.pmiHelper().startLoadBtn();
+    @Test(enabled = true, priority = 13)
+    public void loadNewBook() throws InterruptedException {
+        app.pmiHelper().loadPage();
+        app.pmiHelper().fillLoadParamBook("2003", "Книга записей актов (2000-2003)", "Смерть", "Кронштадтский (1997-2003)", "1СМ", "1", "1");
+        app.pmiHelper().startLoadBtn();
 
         currenttime = System.currentTimeMillis();
         System.out.println("13. загрузка книги а/з " + (currenttime - time));
     }
 
     //поиск книги а/з в списке
-    @Test (enabled = true, priority = 14)
+    @Test(enabled = true, priority = 14)
     public void filterListBook() throws InterruptedException {
         app.pmiHelper().gotoBooksPage();
         app.pmiHelper().fillFilter("Смерть");
@@ -228,7 +227,7 @@ public class PmiTest extends TestBase{
     }
 
     //изменение аттрибутов книги а/з
-    @Test (enabled = true, priority = 15)
+    @Test(enabled = true, priority = 15)
     public void changeBookInfo() throws InterruptedException {
         app.pmiHelper().gotoBooksPage();
         app.pmiHelper().selectBookOnBooksPage("1СМ");
@@ -241,7 +240,7 @@ public class PmiTest extends TestBase{
     }
 
     //назначение пользователя на ввод книги а/з
-    @Test (enabled = true, priority = 16)
+    @Test(enabled = true, priority = 16)
     public void assignBook() throws InterruptedException {
         app.pmiHelper().gotoBooksPage();
         app.pmiHelper().selectBookOnBooksPage("11СМ");
@@ -255,7 +254,7 @@ public class PmiTest extends TestBase{
     }
 
     //ввод данных а/з (ЭТАП ВВОДА)
-    @Test (enabled = true, priority = 17)
+    @Test(enabled = true, priority = 17)
     public void inputMainFieldsDoc() throws InterruptedException {
         app.pmiHelper().unloginBtn();
         app.pmiHelper().confUnloginBtn();
@@ -275,7 +274,7 @@ public class PmiTest extends TestBase{
     }
 
     //просмотр данных а/з (НА ЭТАПЕ ВВОДА)
-    @Test (enabled = true, priority = 18)
+    @Test(enabled = true, priority = 18)
     public void reviewDoc() throws InterruptedException {
         app.pmiHelper().gotoInputPageOper();
         app.pmiHelper().selectBookOnInputPage("Дмитриев Игорь Семенович");
@@ -290,7 +289,7 @@ public class PmiTest extends TestBase{
     }
 
     //редактирование данных а/з (НА ЭТАПЕ ВВОДА)
-    @Test (enabled = true, priority = 19)
+    @Test(enabled = true, priority = 19)
     public void editDoc() throws InterruptedException {
         app.pmiHelper().gotoInputPageOper();
         app.pmiHelper().selectBookOnInputPage("Дмитриев Игорь Семенович");
@@ -306,7 +305,7 @@ public class PmiTest extends TestBase{
     }
 
     //завершение этапа ввода книги а/з
-    @Test (enabled = true, priority = 20)
+    @Test(enabled = true, priority = 20)
     public void endFirstInput() throws InterruptedException {
         app.pmiHelper().startInputBookBtn();
         app.pmiHelper().finishInputBtn();
@@ -316,7 +315,7 @@ public class PmiTest extends TestBase{
     }
 
     //второй этап ввода книги а/з (от назначения до завершения)
-    @Test (enabled = true, priority = 21)
+    @Test(enabled = true, priority = 21)
     public void secondInput() throws InterruptedException {
         app.pmiHelper().unloginBtn();
         app.pmiHelper().confUnloginBtn();
@@ -346,7 +345,7 @@ public class PmiTest extends TestBase{
     }
 
     //перевод книги на этап верификации
-    @Test (enabled = true, priority = 22)
+    @Test(enabled = true, priority = 22)
     public void moveBookToVerification() throws InterruptedException {
         app.pmiHelper().gotoBooksPage();
         app.pmiHelper().selectBookOnBooksPage("11СМ");
@@ -360,7 +359,7 @@ public class PmiTest extends TestBase{
     }
 
     //этап корректировки (ожидается ошибка в поле Отчество, разница в вводе на 1 и 2 этапе)
-    @Test (enabled = true, priority = 23)
+    @Test(enabled = true, priority = 23)
     public void correctionBookFase() throws InterruptedException {
         app.pmiHelper().gotoCorrectionPage();
         app.pmiHelper().selectBookOnCorrectionPage("11СМ");
@@ -376,7 +375,7 @@ public class PmiTest extends TestBase{
     }
 
     //выгрузка книги а/з
-    @Test (enabled = true, priority = 24)
+    @Test(enabled = true, priority = 24)
     public void outputBook() throws InterruptedException {
         app.pmiHelper().gotoOutputBookPage();
         app.pmiHelper().selectAllBookForOutputBtn();
@@ -388,7 +387,7 @@ public class PmiTest extends TestBase{
     }
 
     //просмотр электронного документа
-    @Test (enabled = true, priority = 25)
+    @Test(enabled = true, priority = 25)
     public void reviewDigitalDoc() throws InterruptedException {
         app.pmiHelper().gotoDigital();
         app.pmiHelper().needSignDigDocBtn();
@@ -402,7 +401,7 @@ public class PmiTest extends TestBase{
     }
 
     //просмотр атрибутов ЭД
-    @Test (enabled = true, priority = 26)
+    @Test(enabled = true, priority = 26)
     public void reviewInfoDigitalDoc() throws InterruptedException {
         app.pmiHelper().gotoDigital();
         app.pmiHelper().needSignDigDocBtn();
@@ -416,17 +415,17 @@ public class PmiTest extends TestBase{
     }
 
     //подписание электронного документа
-    @Test (enabled = true, priority = 27)
-    public void signDigitalDoc(){
-    //потом (вопрос о проверке флешки с подписью)
+    @Test(enabled = true, priority = 27)
+    public void signDigitalDoc() {
+        //потом (вопрос о проверке флешки с подписью)
 
         currenttime = System.currentTimeMillis();
         System.out.println("27. подписание электронного документа " + (currenttime - time));
     }
 
     //формирование статистики по площадкам
-    @Test (enabled = true, priority = 28)
-    public void statsLocation(){
+    @Test(enabled = true, priority = 28)
+    public void statsLocation() {
         app.pmiHelper().gotoStatistics();
         app.pmiHelper().gotoLocationStatSpan();
 
@@ -435,7 +434,7 @@ public class PmiTest extends TestBase{
     }
 
     //формирование по пользователям
-    @Test (enabled = true, priority = 29)
+    @Test(enabled = true, priority = 29)
     public void statsUser() throws InterruptedException {
         app.pmiHelper().gotoStatistics();
         app.pmiHelper().gotoUserStatsSpan();

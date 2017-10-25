@@ -30,11 +30,11 @@ public class HelperBase {
 
     public void doubleClickAndType(By locator, String text) throws InterruptedException {
 
-            Actions actions = new Actions(wd);
-            actions.doubleClick(wd.findElement(locator))
-                    .keyDown(Keys.LEFT_CONTROL).sendKeys("a").keyUp(Keys.LEFT_CONTROL)
-                    .sendKeys(Keys.DELETE)
-                    .sendKeys(text).perform();
+        Actions actions = new Actions(wd);
+        actions.doubleClick(wd.findElement(locator))
+                .keyDown(Keys.LEFT_CONTROL).sendKeys("a").keyUp(Keys.LEFT_CONTROL)
+                .sendKeys(Keys.DELETE)
+                .sendKeys(text).perform();
     }
 
     public void type(By locator, String text) {

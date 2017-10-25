@@ -12,7 +12,6 @@ public class DocForLoad {
     public String lNum;
 
 
-
     public String getTypeDoc() {
 
         return typeDoc;
