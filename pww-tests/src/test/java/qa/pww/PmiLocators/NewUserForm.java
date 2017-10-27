@@ -3,11 +3,14 @@ package qa.pww.PmiLocators;
 /**
  * Created by k.smotrov on 29.08.2017.
  */
+
+//ФОРМА СОЗДАНИЯ НОВОГО ПОЛЬЗОВАТЕЛЯ
+
 public abstract class NewUserForm {
 
     //кнопки
-    public static String CREATEUSERBTN = "html/body/div[8]/div[2]/div[2]/div/div/div/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button";
-    public static String EXITNEWUSERBTN = "html/body/div[8]/div[2]/div[2]/div/div/div/div/div[1]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/table/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/em/button";
+    public static String CREATEUSERBTN = "//button[text() = 'Создать пользователя']";
+    public static String EXITNEWUSERBTN = "//button[text() = 'Закрыть']";
 
     //поля
     public static String LOGIN = "html/body/div[8]/div[2]/div[1]/div/div/div/div/div[2]/div[1]/form/div/fieldset[1]/div/div[1]/div[1]/div/input";

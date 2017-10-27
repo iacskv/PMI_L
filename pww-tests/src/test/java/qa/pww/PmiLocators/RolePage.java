@@ -3,13 +3,16 @@ package qa.pww.PmiLocators;
 /**
  * Created by k.smotrov on 29.08.2017.
  */
+
+//СТРАНИЦА РОЛИ
+
 public abstract class RolePage {
 
     //кнопки
-    public static String ADDROLEBTN = "html/body/div[1]/div/div[2]/div[2]/div[1]/div/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button";
-    public static String DELETEROLEBTN = "html/body/div[1]/div/div[2]/div[2]/div[1]/div/table/tbody/tr/td[1]/table/tbody/tr/td[3]/table/tbody/tr[2]/td[2]/em/button";
-    public static String SAVEROLEBTN = "html/body/div[1]/div/div[2]/div[2]/div[1]/div/table/tbody/tr/td[1]/table/tbody/tr/td[5]/table/tbody/tr[2]/td[2]/em/button";
-    public static String ESCAPEROLEBTN = "html/body/div[1]/div/div[2]/div[2]/div[1]/div/table/tbody/tr/td[1]/table/tbody/tr/td[7]/table/tbody/tr[2]/td[2]/em/button";
+    public static String ADDROLEBTN = "//button[text() = 'Добавить']";
+    public static String DELETEROLEBTN = "//button[text() = 'Удалить']";
+    public static String SAVEROLEBTN = "//button[text() = 'Сохранить']";
+    public static String ESCAPEROLEBTN = "//button[text() = 'Отменить']";
 
     //поля
     public static String NAMEROLE = "html/body/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[1]/div[1]/div[2]/div[1]/div[1]/table/tbody/tr/td[1]/div";

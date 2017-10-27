@@ -47,6 +47,7 @@ import static qa.pww.PmiLocators.XmlDigDocForm.*;
 /**
  * Created by k.smotrov on 07.08.2017.
  */
+
 public class PmiHelper extends HelperBase {
 
     public PmiHelper(WebDriver wd) {
@@ -67,7 +68,7 @@ public class PmiHelper extends HelperBase {
 
     public void gotoInputPageOper() throws InterruptedException {
         sleep(2);
-        click(By.xpath(INPUTOPERBTN));
+        click(By.xpath(INPUTBTN));
     }
 
     public void gotoCorrectionPage() {

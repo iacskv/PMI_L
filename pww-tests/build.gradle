@@ -2,6 +2,7 @@ apply plugin: 'java'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -9,7 +10,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
     // сделано так, потому, что не затягивает с maven central !!!
-    runtime fileTree(dir: 'libs', include: '*.jar')
+    compile 'com.oracle:ojdbc6:11.2.0.3'
 
 }
 
